@@ -7,7 +7,7 @@ const HomePage: React.FC = () => {
             <Helmet>
                 <title>Главная - MW Marketplace</title>
             </Helmet>
-            <TestDiv />
+            <h1>Главная</h1>
         </>
     )
 }
