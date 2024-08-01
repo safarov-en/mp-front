@@ -27,16 +27,17 @@ export const Wrapper = styled.div`
 
 export const LeftSide = styled.div`
     display: flex;
-    flex-shrink: 20px;
+    flex-shrink: 0;
+    margin-right: 52px;
     > button {
         height: 44px;
     }
 `
 
-export const Logo = styled.div`
-    width: 20px;
+export const Logo = styled.img`
+    width: 130px;
     height: 44px;
-    margin-right: 10px;
+    margin-right: 20px;
 `
 
 export const Burger = styled.div`
