@@ -1,9 +1,68 @@
-import { Wrapper } from "./styled"
+import { useCallback, useState } from "react"
+import { useSelector, UseSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import {paths} from 'routes/helpers'
+import Button from 'components/Button'
+import Input from 'components/Input'
+import {selectIsLogged} from 'features/App/selectors'
+import UserDropdownMenu from "./UserDropdownMenu"
+import logoPng from 'img/logo.png'
+import {
+    Wrapper,
+    LeftSide,
+    Logo,
+    Burger,
+    SearchWrapper,
+    BtnSearch,
+    RightSide,
+    BtnOrders,
+    BtnFavorites,
+    BtnNotifications,
+    BtnCart
+} from './styled'
 
 const Header: React.FC = () => {
+    const isLogged = useSelector(selectIsLogged)
+    const [searchInput, setSearchInput] = useState<string>('')
+    const changeSearchInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchInput(e.target.value)
+    }, [])
     return (
         <Wrapper>
-            Header
+            <LeftSide>
+                <Link to={paths.home}>
+                    <Logo src={logoPng} />
+                </Link>
+                <Button>
+                    <Burger>
+                        <div /><div /><div />
+                    </Burger>
+                    <span>Каталог</span>
+                </Button>
+            </LeftSide>
+            <SearchWrapper>
+                <Input
+                    value={searchInput}
+                    onChange={changeSearchInput}
+                    isGhost
+                    placeholder='Поиск товаров'
+                />
+                <BtnSearch />
+            </SearchWrapper>
+            <RightSide>
+                {isLogged ? <>
+                    <BtnOrders />
+                    <BtnFavorites />
+                    <BtnNotifications />
+                    <BtnCart />
+                    <UserDropdownMenu />
+                </> : (
+                    <Link to={paths.login}>
+                        &nbsp;&nbsp;&nbsp;
+                        Войти
+                    </Link>
+                )}
+            </RightSide>
         </Wrapper>
     )
 }

@@ -3,7 +3,7 @@ import { T_AppThunk, T_Reducer } from "store/types";
 import {I_AppStore} from './types'
 
 const initialState: I_AppStore = {
-    isLogged: false,
+    isLogged: true,
     isAppLoading: false
 }
 
