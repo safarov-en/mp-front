@@ -13,7 +13,7 @@ const UserDropdownMenu: React.FC = () => {
     const handleLogout = useCallback(() => navigate(paths.logout), [navigate])
     return (
         <DropdownPanel
-            toggler={(props: any) => <UserAvatar onClick={props.onClick} />}
+            toggler={(props) => <UserAvatar onClick={props.onClick} />}
             toLeft
         >
             <UserProfileDropdown>

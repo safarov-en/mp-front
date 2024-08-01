@@ -3,7 +3,7 @@ import { useOnClickOutside } from "helpers/hooks";
 import { Wrapper, DropdownWrapper } from "./styled";
 
 interface I_DropdownPanel {
-    toggler: any
+    toggler: (props: any) => React.ReactElement
     children: React.ReactElement
     toLeft?: boolean
 }

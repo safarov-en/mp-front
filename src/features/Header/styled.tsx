@@ -105,7 +105,7 @@ export const BtnOrders = styled((props: any) => (
     position: relative;
     &:after {
         content: ${({count}) => count ? '"' + count + '"' : ''};
-        background-color: ${colors.red};
+        background-color: ${colors.danger};
         color: #fff;
         border-radius: 50%;
         position: absolute;
@@ -134,7 +134,7 @@ export const BtnFavorites = styled((props: any) => (
     position: relative;
     &:after {
         content: ${({count}) => count ? '"' + count + '"' : ''};
-        background-color: ${colors.red};
+        background-color: ${colors.danger};
         color: #fff;
         border-radius: 50%;
         position: absolute;
@@ -159,7 +159,7 @@ export const BtnNotifications = styled.div<I_CountProps>`
     margin: 0 0 0 20px;
     &:after {
         content: ${({count}) => count ? '"' + count + '"' : ''};
-        background-color: ${colors.red};
+        background-color: ${colors.danger};
         color: #fff;
         border-radius: 50%;
         position: absolute;
@@ -188,7 +188,7 @@ export const BtnCart = styled((props: any) => (
     margin: 0 20px 0 24px;
     &:after {
         content: ${({count}) => count ? '"' + count + '"' : ''};
-        background-color: ${colors.red};
+        background-color: ${colors.danger};
         color: #fff;
         border-radius: 50%;
         position: absolute;

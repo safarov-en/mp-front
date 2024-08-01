@@ -1,10 +1,11 @@
 import { useCallback, useState } from "react"
-import { useSelector, UseSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import {paths} from 'routes/helpers'
 import Button from 'components/Button'
 import Input from 'components/Input'
 import {selectIsLogged} from 'features/App/selectors'
+import {selectFavorites} from 'features/Favorites/selectors'
 import UserDropdownMenu from "./UserDropdownMenu"
 import logoPng from 'img/logo.png'
 import {
@@ -23,6 +24,7 @@ import {
 
 const Header: React.FC = () => {
     const isLogged = useSelector(selectIsLogged)
+    const favorites = useSelector(selectFavorites)
     const [searchInput, setSearchInput] = useState<string>('')
     const changeSearchInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchInput(e.target.value)
@@ -52,7 +54,7 @@ const Header: React.FC = () => {
             <RightSide>
                 {isLogged ? <>
                     <BtnOrders />
-                    <BtnFavorites />
+                    <BtnFavorites count={favorites.length} />
                     <BtnNotifications />
                     <BtnCart />
                     <UserDropdownMenu />
