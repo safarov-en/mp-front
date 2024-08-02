@@ -1,11 +1,14 @@
 import { useState, useCallback } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-import {useAppSelector} from 'store'
+import { post } from "helpers/request";
+import {useAppSelector, useAppDispatch} from 'store'
 import { paths } from "routes/helpers";
 import Input from "components/Input";
 import Button from "components/Button";
+import { setIsAppLading } from "features/App/reducer";
 import { selectIsAppLoading } from "features/App/selectors";
 import logo from 'img/logo.png'
 import {
@@ -18,17 +21,20 @@ import {
     AuthForm,
     GoToWrapper
 } from './styled'
+import type { I_UniRes } from "types";
 
 const RegisterPage: React.FC = () => {
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const isAppLoading = useAppSelector(selectIsAppLoading)
     const [fields, setFields] = useState({
-        login: 'asdfawef',
-        email: 'asdfawef@gmail.com',
+        login: 'TestUser',
+        email: 'testuser@gmail.com',
         phone: '+79845124471',
-        nameFirst: 'sdlfsdn',
-        nameLast: 'ergesrgdsfgsdfg',
-        password: 'asdd121d3msdf4',
-        passwordConfirm: 'asdd121d3msdf4'
+        nameFirst: 'Test',
+        nameLast: 'User',
+        password: 'Qwerty1',
+        passwordConfirm: 'Qwerty1'
     })
     const onChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setFields({
@@ -39,15 +45,32 @@ const RegisterPage: React.FC = () => {
     const isRegisterDisabled = useCallback(() => (
         !fields['nameFirst'].match(/^[A-Za-zА-Яа-я]{1,30}$/)
         || !fields['nameLast'].match(/^[A-Za-zА-Яа-я]{1,30}$/)
-        || !fields['login'].match(/^[A-Za-z0-9_.]{6,20}$/)
+        || !fields['login'].match(/^[A-Za-z0-9_.]{4,20}$/)
         || !fields['phone'].match(/^\+\d{11,15}$/)
-        || !fields['password'].match(/^[^\s]{8,}$/)
-        || !fields['passwordConfirm'].match(/^[^\s]{8,}$/)
+        || !fields['password'].match(/^[^\s]{6,}$/)
+        || !fields['passwordConfirm'].match(/^[^\s]{6,}$/)
         || fields['password'] !== fields['passwordConfirm']
     ), [fields])
     const handleRegister = useCallback(async () => {
-
-    }, [])
+        dispatch(setIsAppLading(true))
+        const payload: {[k: string]: any} = {
+            login: fields['login'],
+            email: fields['email'],
+            phone: fields['phone'],
+            password: fields['password'],
+            nameFirst: fields['nameFirst'],
+            nameLast: fields['nameLast'],
+        }
+        const res = await post('/user/register', payload)
+        const {status}: I_UniRes = res
+        if(status === 'error') {
+            toast.error('Ошибка! Введённые данные пользователя не верный.')
+            return
+        }
+        toast.success('Вы успещно зарегистрированы')
+        navigate(paths.login)
+        dispatch(setIsAppLading(false))
+    }, [dispatch, fields, navigate])
     return (
         <PageWrapper>
             <Helmet>
@@ -93,7 +116,7 @@ const RegisterPage: React.FC = () => {
                             name='password'
                             label='Пароль'
                             placeholder="Введите пароль"
-                            value={fields['nameLast']}
+                            value={fields['password']}
                             onChange={onChangeInput}
                             type='password'
                         />

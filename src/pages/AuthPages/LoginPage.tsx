@@ -1,12 +1,15 @@
 import { useState, useCallback } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-import {useAppSelector} from 'store'
+import { post } from "helpers/request";
+import {useAppSelector, useAppDispatch} from 'store'
 import { paths } from "routes/helpers";
 import Input from "components/Input";
 import Button from "components/Button";
 import { selectIsAppLoading } from "features/App/selectors";
+import { setIsAppLading, setIsLogged } from "features/App/reducer";
 import logo from 'img/logo.png'
 import {
     PageWrapper,
@@ -20,6 +23,8 @@ import {
 } from './styled'
 
 const LoginPage: React.FC = () => {
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const isAppLoading = useAppSelector(selectIsAppLoading)
     const [fields, setFields] = useState({
         loginOrEmail: process.env.REACT_APP_DEV_LOGIN || '',
@@ -38,8 +43,21 @@ const LoginPage: React.FC = () => {
         )
     }, [fields])
     const handleLogin = useCallback(async () => {
-
-    }, [])
+        dispatch(setIsAppLading(true))
+        const res = await post('/user/login', {
+            loginOrEmail: fields['loginOrEmail'],
+            password: fields['password']
+        })
+        const {status} = res
+        if(status === 'error') {
+            toast.error('Введённые данные неверны')
+            dispatch(setIsAppLading(false))
+            return
+        }
+        dispatch(setIsLogged(true))
+        navigate(paths.home)
+        dispatch(setIsAppLading(false))
+    }, [dispatch, fields, navigate])
     const handleFormKeyPress = useCallback(({code}: React.KeyboardEvent<HTMLFormElement>) => {
         if((['Enter', 'NumpadEnter'].includes(code)) && !isLoginDisabled()) {
             handleLogin()
@@ -57,7 +75,7 @@ const LoginPage: React.FC = () => {
                 <AuthForm>
                     <VerticalCol onKeyPress={handleFormKeyPress}>
                         <Input
-                            name='loginOrEmailOrPhone'
+                            name='loginOrEmail'
                             label='Логин или почта'
                             placeholder="Введите логин или почту"
                             autocomplete="username"
