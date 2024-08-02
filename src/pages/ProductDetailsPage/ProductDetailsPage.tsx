@@ -27,13 +27,13 @@ const ProductDetailsPage: React.FC = () => {
     const [productDetails, setProductDetails] = useState<I_ProductDetails>()
     useEffect(() => {
         const found = dummyProducts.find((p) => (
-            [String(p.id), p.slug].includes(params.isOrSlug)
+            [String(p.id), p.slug].includes(params.idOrSlug)
         ))
         if(found) setProductDetails(found)
-    }, [params.isOrSlug])
+    }, [params.idOrSlug])
     const idsInFavorites = useSelector(selectFavorites)
     const isLiked = useMemo(
-        () => idsInFavorites.includes(productDetails!.id),
+        () => idsInFavorites.includes(productDetails?.id!),
         [idsInFavorites, productDetails]
     )
     const handleFavorites = useCallback((e: React.MouseEvent<HTMLElement>) => {
@@ -45,7 +45,7 @@ const ProductDetailsPage: React.FC = () => {
         )
     }, [dispatch, idsInFavorites])
     if(!productDetails) return null
-    const {id, imgSrc, title, desc, priceRegular, priceDiscounted} = productDetails
+    const {id, image, title, desc, priceRegular, priceDiscounted} = productDetails
     return (
         <>
             <Helmet>
@@ -54,7 +54,7 @@ const ProductDetailsPage: React.FC = () => {
             <PageWrapper>
                 <Wrapper>
                     <ImageWrapper>
-                        <Image src={imgSrc} />
+                        <Image src={image} />
                         <LikeWrapper
                             data-product-id={id}
                             onClick={handleFavorites}

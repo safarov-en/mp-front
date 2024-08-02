@@ -23,8 +23,8 @@ const userDataReducer = createReducer(initialState, (builder) => {
     )
 })
 
-export const setUserData = (userData: I_UserData) => {
+export const setUserData = (userData: I_UserData) => (
     setUserDataAction(userData)
-}
+)
 
 export default userDataReducer

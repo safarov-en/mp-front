@@ -23,7 +23,7 @@ import { useDispatch } from "react-redux";
 interface I_ProductCardProps {
     id: number
     slug?: string
-    imgSrc: string
+    image: string
     priceRegular: number
     priceDiscounted?: number
     title: string
@@ -35,7 +35,7 @@ interface I_ProductCardProps {
 const ProductCard: React.FC<I_ProductCardProps> = ({
     id,
     slug,
-    imgSrc,
+    image,
     priceRegular,
     priceDiscounted,
     title,
@@ -75,7 +75,7 @@ const ProductCard: React.FC<I_ProductCardProps> = ({
                 </LikeWrapper>
             )}
             <Link to={`/product/${slug || id}`}>
-                <Image src={imgSrc} />
+                <Image src={`${process.env.REACT_APP_API_URL}/images/products/${image}`} />
             </Link>
             <PriceWrapper>
                 {Number.isInteger(priceDiscounted) ? <>

@@ -1,11 +1,10 @@
 import { lazy } from "react";
 import {Route, Navigate, Routes, useLocation} from 'react-router-dom'
 import {checkPathMatch, paths} from './helpers'
-import FavoritesPage from "pages/FavoritesPage";
 
 const HomePage = lazy(() => import('pages/HomePage'))
 const ProductDetailsPage = lazy(() => import('pages/ProductDetailsPage'))
-const FsvoritesPage = lazy(() => import('pages/FavoritesPage'))
+const FavoritesPage = lazy(() => import('pages/FavoritesPage'))
 
 const PublicRoutes: React.FC = () => {
     const location = useLocation()
