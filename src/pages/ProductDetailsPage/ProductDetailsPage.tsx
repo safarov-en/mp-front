@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 import { addToFavorites, removeFromFavorites } from "features/Favorites/reducer";
 import { selectFavorites } from "features/Favorites/selectors";
-import { dummyProducts } from "pages/dummyProducts";
 import { I_ProductDetails } from "pages/types";
 import {ReactComponent as HeardEmpty} from './img/heart-empty.svg'
 import {ReactComponent as HeardFilled} from './img/heart-filled.svg'
@@ -20,16 +19,16 @@ import {
     PriceDiscounted
 } from './styled'
 import { PageWrapper } from "App.styled";
+import {get} from 'helpers/request'
+import { I_UniRes } from "types";
 
 const ProductDetailsPage: React.FC = () => {
     const params = useParams()
     const dispatch = useDispatch()
     const [productDetails, setProductDetails] = useState<I_ProductDetails>()
     useEffect(() => {
-        const found = dummyProducts.find((p) => (
-            [String(p.id), p.slug].includes(params.idOrSlug)
-        ))
-        if(found) setProductDetails(found)
+        get(`/products/${params.idOrSlug}`)
+            .then((res: I_UniRes) => setProductDetails(res.data))
     }, [params.idOrSlug])
     const idsInFavorites = useSelector(selectFavorites)
     const isLiked = useMemo(
@@ -45,7 +44,7 @@ const ProductDetailsPage: React.FC = () => {
         )
     }, [dispatch, idsInFavorites])
     if(!productDetails) return null
-    const {id, image, title, desc, priceRegular, priceDiscounted} = productDetails
+    const {id, image, title, description, price, priceDiscounted} = productDetails
     return (
         <>
             <Helmet>
@@ -54,7 +53,7 @@ const ProductDetailsPage: React.FC = () => {
             <PageWrapper>
                 <Wrapper>
                     <ImageWrapper>
-                        <Image src={image} />
+                        <Image src={`${process.env.REACT_APP_API_URL}/images/products/${image}`} />
                         <LikeWrapper
                             data-product-id={id}
                             onClick={handleFavorites}
@@ -64,15 +63,16 @@ const ProductDetailsPage: React.FC = () => {
                     </ImageWrapper>
                     <InfoWrapper>
                         <h1>{title}</h1>
-                        <p>{desc}</p>
+                        <p>{description}</p>
                         <PriceWrapper>
                             {Number.isInteger(priceDiscounted) ? <>
                                 <PriceDiscounted>{priceDiscounted} ₽</PriceDiscounted>
-                                <PriceRegularWhenDiscounted>{priceRegular} ₽</PriceRegularWhenDiscounted>
+                                <PriceRegularWhenDiscounted>{price} ₽</PriceRegularWhenDiscounted>
                             </> : (
-                                <PriceRegular>{priceRegular} ₽</PriceRegular>
+                                <PriceRegular>{price} ₽</PriceRegular>
                             )}
                         </PriceWrapper>
+                        <p>{description}</p>
                     </InfoWrapper>
                 </Wrapper>
             </PageWrapper>
