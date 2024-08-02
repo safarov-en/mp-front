@@ -1,9 +1,10 @@
-import { createSlice, Dispatch } from "@reduxjs/toolkit";
-import { T_AppThunk, T_Reducer } from "store/types";
-import {I_AppStore} from './types'
+import { createSlice } from "@reduxjs/toolkit";
+import type { Dispatch } from "@reduxjs/toolkit";
+import type { T_AppThunk, T_Reducer } from "store/types";
+import type {I_AppStore} from './types'
 
 const initialState: I_AppStore = {
-    isLogged: true,
+    isLogged: false,
     isAppLoading: false
 }
 

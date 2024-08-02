@@ -28,7 +28,6 @@ export const Wrapper = styled.div`
 
 export const Label = styled.label`
     color: #6e6b7b;
-    font-size: 12px;
     display: flex;
     flex-direction: column;
     > div {
@@ -49,6 +48,7 @@ interface I_InputItselfProps {
 export const InputItself = styled.input<I_InputItselfProps>`
     width: 100%;
     color: #5e5873;
+    height: 40px;
     border: ${(p) => p.isGhost ? '0' : '1px solid #d8d6de'};
     border-bottom: ${(p) => p.isGhost ? '0' : '1px solid #e2e0e6'};
     border-radius: ${(p) => p.isGhost ? '0' : '4px'};
@@ -73,7 +73,6 @@ export const InputItself = styled.input<I_InputItselfProps>`
     }
     &::placeholder {
         color: #b1b1b1;
-        font-size: 14px;
     }
 `
 

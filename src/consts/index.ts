@@ -1,4 +1,4 @@
-export const HEADER_HEIGHT = 60
+export const HEADER_HEIGHT = 72
 export const FOOTER_HEIGHT = 36
 export const SECOND_IN_MS = 1000
 export const Z_INDEX_LEVEL_1 = 1

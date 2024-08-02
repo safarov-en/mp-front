@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "store";
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 import { addToFavorites, removeFromFavorites } from "features/Favorites/reducer";
 import { selectFavorites } from "features/Favorites/selectors";
-import { I_ProductDetails } from "pages/types";
+import type { I_ProductDetails } from "pages/types";
 import {ReactComponent as HeardEmpty} from './img/heart-empty.svg'
 import {ReactComponent as HeardFilled} from './img/heart-filled.svg'
 import {
@@ -20,17 +20,17 @@ import {
 } from './styled'
 import { PageWrapper } from "App.styled";
 import {get} from 'helpers/request'
-import { I_UniRes } from "types";
+import type { I_UniRes } from "types";
 
 const ProductDetailsPage: React.FC = () => {
     const params = useParams()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [productDetails, setProductDetails] = useState<I_ProductDetails>()
     useEffect(() => {
         get(`/products/${params.idOrSlug}`)
             .then((res: I_UniRes) => setProductDetails(res.data))
     }, [params.idOrSlug])
-    const idsInFavorites = useSelector(selectFavorites)
+    const idsInFavorites = useAppSelector(selectFavorites)
     const isLiked = useMemo(
         () => idsInFavorites.includes(productDetails?.id!),
         [idsInFavorites, productDetails]
@@ -48,7 +48,7 @@ const ProductDetailsPage: React.FC = () => {
     return (
         <>
             <Helmet>
-                <title>Главная - KPL Market</title>
+                <title>Главная - MW Marketplace</title>
             </Helmet>
             <PageWrapper>
                 <Wrapper>

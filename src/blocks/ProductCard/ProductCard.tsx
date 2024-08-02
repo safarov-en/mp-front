@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { UseDispatch } from "react-redux";
+import {useAppDispatch} from 'store'
 import { Link, useLocation } from "react-router-dom";
 import Button from 'components/Button'
 import { paths } from "routes/helpers";
@@ -18,7 +18,6 @@ import {
     Desc,
     BtnsWrapper
 } from './styled'
-import { useDispatch } from "react-redux";
 
 interface I_ProductCardProps {
     id: number
@@ -43,7 +42,7 @@ const ProductCard: React.FC<I_ProductCardProps> = ({
     isLiked,
     hideLikes = false
 }) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const location = useLocation()
     const handleFavorites = useCallback((e: React.MouseEvent<HTMLElement>) => {
         const {productId} = e.currentTarget.dataset
