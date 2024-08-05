@@ -29,6 +29,7 @@ export const LeftSide = styled.div`
     display: flex;
     flex-shrink: 0;
     margin-right: 52px;
+
     > button {
         height: 44px;
     }
@@ -45,6 +46,7 @@ export const Burger = styled.div`
     height: 20px;
     padding: 4px 0;
     margin-right: 10px;
+
     div {
         position: relative;
         display: block;
@@ -53,6 +55,7 @@ export const Burger = styled.div`
         margin: 0 1px;
         background-color: #fff;
     }
+
     div:not(:first-child) {
         margin-top: 3px;
     }
@@ -65,6 +68,7 @@ export const SearchWrapper = styled.div`
     display: flex;
     align-items: center;
     padding: 0 20px 0 10px;
+
     input {
         font-size: 16px;
         line-height: 40px;
@@ -83,6 +87,7 @@ export const RightSide = styled.div`
     display: flex;
     flex-shrink: 0;
     align-items: center;
+
     a:not([href*='login']) {
         position: absolute;
         top: 0;
@@ -103,6 +108,7 @@ export const BtnOrders = styled((props: any) => (
     background-image: url(${orders});
     margin: 0 0 0 20px;
     position: relative;
+
     &:after {
         content: ${({count}) => count ? '"' + count + '"' : ''};
         background-color: ${colors.danger};
@@ -132,6 +138,7 @@ export const BtnFavorites = styled((props: any) => (
     background-image: url(${favorites});
     margin: 0 0 0 20px;
     position: relative;
+
     &:after {
         content: ${({count}) => count ? '"' + count + '"' : ''};
         background-color: ${colors.danger};
@@ -157,6 +164,7 @@ export const BtnNotifications = styled.div<I_CountProps>`
     background-image: url(${notifications});
     position: relative;
     margin: 0 0 0 20px;
+
     &:after {
         content: ${({count}) => count ? '"' + count + '"' : ''};
         background-color: ${colors.danger};
@@ -186,6 +194,7 @@ export const BtnCart = styled((props: any) => (
     background-image: url(${cart});
     position: relative;
     margin: 0 20px 0 24px;
+
     &:after {
         content: ${({count}) => count ? '"' + count + '"' : ''};
         background-color: ${colors.danger};

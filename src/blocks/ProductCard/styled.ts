@@ -4,6 +4,7 @@ import colors from 'consts/colors'
 export const Wrapper = styled.div`
     padding: 10px;
     position: relative;
+
     svg {
         cursor: pointer;
     }
@@ -66,6 +67,7 @@ export const Desc = styled.div`
 export const BtnsWrapper = styled.div`
     display: flex;
     flex-direction: column;
+
     * + * {
         margin-top: 10px;
     }

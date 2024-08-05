@@ -68,9 +68,11 @@ export const InputItself = styled.input<I_InputItselfProps>`
         if(p.isGhost) return 'transparent'
         return '#fff'
     }};
+
     &:focus {
         outline: 0;
     }
+
     &::placeholder {
         color: #b1b1b1;
     }
