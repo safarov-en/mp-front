@@ -10,7 +10,7 @@ import Input from "components/Input";
 import Button from "components/Button";
 import { setIsAppLading } from "features/App/reducer";
 import { selectIsAppLoading } from "features/App/selectors";
-import logo from 'img/logo.png'
+import logo from 'img/logo.svg'
 import {
     PageWrapper,
     FormWrapper,
@@ -74,7 +74,7 @@ const RegisterPage: React.FC = () => {
     return (
         <PageWrapper>
             <Helmet>
-                <title>Регистрация - MW Marketplace</title>
+                <title>Регистрация - Marketplace</title>
             </Helmet>
             <FormWrapper>
                 <Logo src={logo} />

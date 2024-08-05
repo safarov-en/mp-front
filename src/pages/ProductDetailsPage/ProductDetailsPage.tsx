@@ -48,7 +48,7 @@ const ProductDetailsPage: React.FC = () => {
     return (
         <>
             <Helmet>
-                <title>Главная - MW Marketplace</title>
+                <title>Главная - Marketplace</title>
             </Helmet>
             <PageWrapper>
                 <Wrapper>

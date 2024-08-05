@@ -4,7 +4,7 @@ const AccountSettingsPage: React.FC = () => {
     return (
         <>
             <Helmet>
-                <title>Настройка аккаунта - MW Marketplace</title>
+                <title>Настройка аккаунта - Marketplace</title>
             </Helmet>
             <h1>Настройка аккаунта</h1>
         </>

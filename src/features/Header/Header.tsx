@@ -7,7 +7,7 @@ import Input from 'components/Input'
 import {selectIsLogged} from 'features/App/selectors'
 import {selectFavorites} from 'features/Favorites/selectors'
 import UserDropdownMenu from "./UserDropdownMenu"
-import logoPng from 'img/logo.png'
+import logoPng from 'img/logo.svg'
 import {
     Wrapper,
     LeftSide,

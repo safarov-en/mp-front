@@ -11,7 +11,7 @@ const FavoritesPage: React.FC = () => {
     return (
         <>
             <Helmet>
-                <title>Главная - MW Market</title>
+                <title>Главная - Market</title>
             </Helmet>
             <PageWrapper>
                 <h2>Избранное</h2>
